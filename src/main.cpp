@@ -1,6 +1,6 @@
 #include <ArduinoOSC.h>
 #include <Nokia_5110.h>
-
+//5110 connections
 #define RST 18
 #define CE 5
 #define DC 4
@@ -15,7 +15,7 @@ const char *pwd = "artemispardus*123";
 const IPAddress ip(192, 168, 1, 201);
 const IPAddress gateway(192, 168, 1, 1);
 const IPAddress subnet(255, 255, 255, 0);
-// for ArduinoOSC
+// for OSC
 OscWiFi osc;
 const char *host = "192.168.1.200";
 //const char* host = "192.168.1.101";
@@ -58,16 +58,18 @@ void setup()
   
   while (WiFi.status() != WL_CONNECTED)
   {
+    //print dots when connecting
     lcd.print(".");
     delay(500);
   }
   lcd.clear();
+  //show message when connection okey
   lcd.printf("wifi connected IP \n");
   lcd.println(WiFi.localIP());
 
   // ArduinoOSC
   osc.begin(recv_port);
-
+  //every channel need to be subscribed
   osc.subscribe("/slider0", [](OscMessage &m) {
     updateLcd(0, 0, m.arg<float>(0), "slider0: ");
   });
