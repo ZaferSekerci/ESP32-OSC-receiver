@@ -40,12 +40,14 @@ void onOscReceived(OscMessage &m)
   Serial.print(m.arg<String>(2));
   Serial.println();
 }
-void setupLcd(){
+void setupLcd()
+{
 }
-void updateLcd(int row,int col,float val,const char *name){
-  lcd.setCursor(col,row);
-  lcd.clear(row,0,84);
-  lcd.printf("%s %.1f",name,val);  
+void updateLcd(int row, int col, float val, const char *name)
+{
+  lcd.setCursor(col, row);
+  lcd.clear(row, 0, 84);
+  lcd.printf("%s %.1f", name, val);
 }
 
 void setup()
@@ -55,7 +57,7 @@ void setup()
   // WiFi stuff
   WiFi.begin(ssid, pwd);
   WiFi.config(ip, gateway, subnet);
-  
+
   while (WiFi.status() != WL_CONNECTED)
   {
     //print dots when connecting
